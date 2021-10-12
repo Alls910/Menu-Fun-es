@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define size 10
+
+//Função Inversora
+int reverse(int n){
+  int saida = 0;
+  while(n>0){
+    saida*=10;
+    saida+= (n%10);
+    n/=10;
+  }
+  return saida;
+}
+
+//Função Somatória
+int somar(int vetor[], int y){
+  int soma = 0;
+  for(int i=0; i<y; i++){
+    soma+=vetor[i];
+  }
+  return soma;
+}
+
+//Função Máxima
+int maxima(int vetor[], int tam){
+  int maior = 0;
+  for(int i=0; i<tam; i++){
+    if(maior < vetor[i]){
+      maior = vetor[i];
+    }
+  }
+  return maior;
+}
+
+//Função Mínima
+int minima(int vetor[], int tam){
+  int menor = vetor[0];
+  for(int i=1; i<tam; i++){
+    if(menor > vetor[i]){
+      menor = vetor[i];
+    }
+  }
+  return menor;
+}
+
+//Função Mediana
+int ordenação(int vetor[], int a){
+  for(int j=1; j<10; j++){
+    int sub = vetor[j];
+    a=j-1;
+    while(a>=0 && vetor[a]>sub){
+      vetor[a+1]=vetor[a];
+      a--;
+    }
+  vetor[a+1]=sub;
+  }
+  for(a=0; a<10; a++){
+    printf("%d ", vetor[a]);
+  }
+  return a;
+}
+
+int valor_mediana(int vetor[], int tam){
+  int mediana;
+  int x = ordenação(vetor, tam);
+  for(int i=0; i<tam;i++){
+    if(tam%2!=0){
+      mediana = vetor[tam/2]; 
+    }
+    else{
+      mediana = (vetor[(tam/2)-1]+vetor[tam/2])/2;
+
+    }
+  }
+
+  return mediana;
+}
+
+//Função Média
+int calc_media(int vetor[], int tam){
+  int soma = 0;
+  for(int i=0; i<tam; i++){
+    soma+=vetor[i];
+    }
+  int media = soma/tam;
+
+  return media;
+}
+
+//Função Fatorial Recursiva
+int calc_fatorial(int x){
+  int fatorial;
+  if(x == 0){
+    fatorial = 1;
+  }
+  else{
+    fatorial = x * calc_fatorial(x-1);
+  }
+  return fatorial;
+}
+
+
+int main() {
+
+srand(time(NULL));
+  int x;
+  int vetor[size];
+
+  printf("Vetor: ");
+  for(int i=0; i<size; i++){
+    x = rand()%10;
+    vetor[i] = x;
+    printf("%d ", x);
+  }
+  printf("\n\n");
+
+  printf("MENU:\n");
+  printf("1. Função Inversora\n");
+  printf("2. Função Somatória\n");
+  printf("3. Função Máxima\n");
+  printf("4. Função Mínima\n");
+  printf("5. Função Mediana\n");
+  printf("6. Função Média\n");
+  printf("7. Função Fatorial\n");
+  printf("8. Sair\n");
+
+  int opcao, num;
+  do{
+  printf("Digite sua opção: ");
+  scanf("%d", &opcao);
+    if(opcao == 1){
+      printf("Digite número: ");
+      scanf("%d", &num);
+      int rvs = reverse(num);
+      printf("Inverso: %d\n\n", rvs);
+    }
+
+    if(opcao == 2){
+      int soma = somar(vetor, size);
+      printf("Soma: %d\n\n", soma);    
+    }
+
+    if(opcao == 3){
+      int maior = maxima(vetor, size);
+      printf("Maior: %d\n\n", maior);
+    }
+
+    if(opcao == 4){
+      int menor = minima(vetor, size);
+      printf("Menor: %d\n\n", menor);
+      
+    }
+    if(opcao == 5){
+      int maior = valor_mediana(vetor, size);
+      printf("\nMediana: %d\n\n", maior);    
+    }
+
+    if(opcao == 6){
+      int media = calc_media(vetor, size);
+      printf("Media: %d\n\n", media);
+    }
+
+    if(opcao == 7){
+      printf("Digite número: ");
+      scanf("%d", &num);
+      int fat = calc_fatorial(num);
+      printf("Fatorial: %d\n\n", fat);   
+    }
+    if(opcao<1 || opcao>8){
+      printf("Opção Inválida\n");
+    }
+
+  }while(opcao!=8);
+
+  return 0;
+}
